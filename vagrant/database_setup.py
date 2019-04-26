@@ -1,10 +1,8 @@
-
-
 # provide function and variables for run-time environment
 import sys
 
 # string classes imported used for writing mapper code
-from sqlalchemy import Colum, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
 
 # use in configuration and class code
 from sqlalchemy.ext.declarative import declarative_base
@@ -23,9 +21,21 @@ Base = declarative_base()
 
 class Restaurant(Base):
     __tablename__ = 'restaurant'
+    name = Column(String(80), nullable = False)
+    id = Column(Integer, primary_key = True)
 
-class MenuItems(Base):
+class MenuItem(Base):
     __tablename__ = 'menu_item'
+    # create database with sqlalchemy: map python objects to columns in our db
+    # sytax: columnName = Column(attributes)
+    name = Column(String(80), nullable = False)
+    id = Column(Integer, primary_key = True)
+    course = Column(String(250))
+    description = Column(String(250))
+    price = Column(String(8))
+    # foregin key relationship between restaurant class and menuitems class
+    restaurant_id = Column(Integer, ForeignKey('restaurant.id'))
+    restaurant = relationship(Restaurant)
 
 #######insert at end of file########
 # points to database being used

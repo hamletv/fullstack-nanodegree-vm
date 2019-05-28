@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <h1>{{restaurant.name}}</h1>
+
+    {% if items <= 0 %}
+    <p>You currently have no menu items.</p>
+    <a href="#">Create new item</a>
+
+    {% else %}
+
+    <a href="#">Create new item</a>
+    <br>
+    <br>
+
+    {% for item in items %}
+
+    <h2>{{item.course}}</h2>
+    {{item.name}}
+    <br>
+    {{item.description}}
+    <br>
+    {{item.price}}
+    <br>
+    <a href="#">Edit</a>
+    <br>
+    <a href="#">Delete</a>
+    <br>
+    <br>
+
+    {% endfor %}
+    {% endif %}
+
+  </body>
+</html>

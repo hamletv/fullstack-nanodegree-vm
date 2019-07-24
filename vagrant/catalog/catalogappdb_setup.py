@@ -20,6 +20,12 @@ class Team(Base):               # class definition
     name = Column(String(80), nullable = False)
     id = Column(Integer, primary_key = True)
     # mapper code
+    @property
+    def serialize(self):
+        return {
+        'name': self.name,
+        'id': self.id
+        }
 
 class Player(Base):             # class definition
     __tablename__ = 'player'    # table information
@@ -33,6 +39,14 @@ class Player(Base):             # class definition
     # look in team table and get team.id whenever team_id is called.
     team = relationship(Team)
     # mapper code
+    @property
+    def serialize(self):
+        return {
+        'name': self.name,
+        'id': self.id,
+        'position': self.position,
+        'bio': self.team_id
+        }
 
 ### insert at end of file ###
 engine = create_engine('sqlite:///mydatabase.db')
